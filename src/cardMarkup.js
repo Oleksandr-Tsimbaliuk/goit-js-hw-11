@@ -3,7 +3,7 @@ export default function createCardMarkup(elements) {
     .map(element => {
       return `
   <div class="photo-card">
-  <img src="${element.webformatURL}" alt="" loading="lazy" width="320" />
+  <a href="${element.largeImageURL}" class = "card-link"><img src="${element.webformatURL}" alt="${element.tags}" loading="lazy" class = "card-img" width="320" /></a>
   <div class="info">
     <p class="info-item">
       <b>Likes${element.likes}</b>
@@ -22,3 +22,11 @@ export default function createCardMarkup(elements) {
     })
     .join('');
 }
+
+// webformatURL - посилання на маленьке зображення для списку карток.
+// largeImageURL - посилання на велике зображення.
+// tags - рядок з описом зображення. Підійде для атрибуту alt.
+// likes - кількість лайків.
+// views - кількість переглядів.
+// comments - кількість коментарів.
+// downloads - кількість завантажень.

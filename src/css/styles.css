@@ -29,6 +29,39 @@ body {
   gap: 20px;
 }
 
+.search-form {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.search-btn {
+  padding: 10px 20px;
+  border-radius: 15px;
+  background-color: rgb(38, 53, 189);
+  color: white;
+  cursor: pointer;
+}
+
+.search-btn:hower {
+  background-color: rgb(19, 40, 233);
+}
+
+.load-more {
+  padding: 10px 20px;
+  border-radius: 15px;
+  background-color: rgb(38, 53, 189);
+  color: white;
+  cursor: pointer;
+  margin: 0 auto;
+  display: block;
+}
+
+.load-more:hower {
+  background-color: rgb(19, 40, 233);
+}
+
 .hidden {
   display: none;
 }

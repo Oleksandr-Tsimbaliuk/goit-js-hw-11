@@ -6,7 +6,6 @@ export default class PixabayAPI {
 
   page = 1;
   query = null;
-
   hits = 40;
   hitsCounter = this.hits;
 

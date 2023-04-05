@@ -18,52 +18,48 @@ let galleryLightbox = new SimpleLightbox('.gallery .card-link', {
   captionsData: 'alt',
 });
 
-function onFormElSubmit(event) {
+async function onFormElSubmit(event) {
   event.preventDefault();
   pixabayAPI.query = event.target.elements.searchQuery.value;
-  pixabayAPI.page = 1;
-  loadMoreBtn.classList.remove('hidden');
+  pixabayAPI.setFirstPage();
 
-  if (pixabayAPI.query === '') {
-    Notify.warning('You entered an empty request, please check your input');
+  if (!pixabayAPI.query) {
+    galleryEl.innerHTML = '';
+    loadMoreBtn.classList.add('hidden');
+    Notify.warning(
+      'Sorry, there are no images matching your search query. Please try again.'
+    );
     return;
   }
+  try {
+    const { data } = await pixabayAPI.fetchPhotos();
 
-  pixabayAPI
-    .fetchPhotos()
-    .then(({ data }) => {
-      pixabayAPI.hitsCounter = pixabayAPI.hits;
-      galleryEl.innerHTML = cardMarkup(data.hits);
-      galleryLightbox.refresh();
-    })
-    .catch(error => console.log(error));
+    event.target.elements.searchQuery.value = '';
+    loadMoreBtn.classList.remove('hidden');
+    pixabayAPI.hitsCounter = pixabayAPI.hits;
+    galleryEl.innerHTML = cardMarkup(data.hits);
+    galleryLightbox.refresh();
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-function onLoadMoreBtn() {
-  pixabayAPI.page += 1;
-  pixabayAPI
-    .fetchPhotos()
-    .then(({ data }) => {
-      if (data.totalHits / pixabayAPI.hitsCounter <= 1) {
-        Notify.warning(
-          "We're sorry, but you've reached the end of search results."
-        );
-        loadMoreBtn.classList.add('hidden');
-      }
-      galleryEl.insertAdjacentHTML('beforeend', cardMarkup(data.hits));
-      galleryLightbox.refresh();
-    })
-    .catch(error => console.log(error));
+async function onLoadMoreBtn() {
+  pixabayAPI.setNextPage();
+
+  try {
+    const { data } = await pixabayAPI.fetchPhotos();
+
+    if (data.totalHits / pixabayAPI.hitsCounter <= 1) {
+      Notify.warning(
+        "We're sorry, but you've reached the end of search results."
+      );
+      loadMoreBtn.classList.add('hidden');
+    }
+
+    galleryEl.insertAdjacentHTML('beforeend', cardMarkup(data.hits));
+    galleryLightbox.refresh();
+  } catch (error) {
+    console.log(error);
+  }
 }
-
-// loadMoreBtn.classList.add('hidden');
-// pixabayAPI.hits = pixabayAPI.hitsCounter - data.totalHits;
-// console.log(`hits: ${pixabayAPI.hits}`);
-// pixabayAPI.hitsCounter += pixabayAPI.hits;
-
-// console.log(data);
-
-// console.log(`totalHits: ${data.totalHits}`);
-// console.log(`hits: ${pixabayAPI.hits}`);
-// console.log(`counter: ${pixabayAPI.hitsCounter}`);
-// console.log(data.hits);

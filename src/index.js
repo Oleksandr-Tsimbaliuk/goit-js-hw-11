@@ -8,7 +8,6 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 const formEl = document.querySelector('.search-form');
 const galleryEl = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
-loadMoreBtn.classList.remove('load-more');
 
 const pixabayAPI = new PixabayAPI();
 

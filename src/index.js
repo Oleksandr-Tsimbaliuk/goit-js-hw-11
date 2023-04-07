@@ -9,6 +9,7 @@ const formEl = document.querySelector('.search-form');
 const galleryEl = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
 const checkBox = document.querySelector('input[type="checkbox"]');
+const loaderEllips = document.querySelector('.loader-ellips');
 
 const pixabayAPI = new PixabayAPI();
 let isDataRecived = false;
@@ -111,18 +112,14 @@ function onWindowScroll() {
   }
   if (!checkBox.checked) {
     window.removeEventListener('scroll', onWindowScroll);
-    // refs.loaderEllips.style.display = 'none';
+    loaderEllips.style.display = 'none';
     loadMoreBtn.style.display = 'block';
   }
   if (checkBox.checked) {
-    // refs.loaderEllips.style.display = 'block';
-    loadMoreBtnEl.style.display = 'none';
+    loaderEllips.style.display = 'block';
+    loadMoreBtn.style.display = 'none';
   }
 }
-
-// const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-// const windowEl = document.documentElement;
-// console.log('windowEl:', windowEl.scrollTop);
 
 function ceckTotalHits(data) {
   if (data.totalHits / pixabayAPI.hitsCounter <= 1) {

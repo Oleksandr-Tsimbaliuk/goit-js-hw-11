@@ -3,19 +3,23 @@ export default function createCardMarkup(elements) {
     .map(element => {
       return `
   <div class="photo-card">
-  <a href="${element.largeImageURL}" class = "card-link"><img src="${element.webformatURL}" alt="${element.tags}" loading="lazy" class = "card-img" width="320" /></a>
+  <a class = "card-link" href="${element.largeImageURL}" ><img class = "card-img" src="${element.webformatURL}" alt="${element.tags}" loading="lazy" width = "480" /></a>
   <div class="info">
     <p class="info-item">
-      <b>Likes ${element.likes}</b>
+    <b>Likes:</b>
+    <b>${element.likes}</b>
     </p>
     <p class="info-item">
-      <b>Views ${element.views}</b>
+      <b>Views:</b>
+      <b>${element.views}</b>
     </p>
     <p class="info-item">
-      <b>Comments ${element.comments}</b>
+      <b>Comments:</b>
+      <b>${element.comments}</b>
     </p>
     <p class="info-item">
-      <b>Downloads ${element.downloads}</b>
+      <b>Downloads:</b>
+      <b>${element.downloads}</b>
     </p>
   </div>
 </div>`;

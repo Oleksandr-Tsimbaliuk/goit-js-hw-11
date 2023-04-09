@@ -1,9 +1,9 @@
 import './css/styles.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import PixabayAPI from './pixabay-api';
-import cardMarkup from './cardMarkup';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import cardMarkup from './cardMarkup';
+import PixabayAPI from './pixabay-api';
 
 const formEl = document.querySelector('.search-form');
 const galleryEl = document.querySelector('.gallery');
@@ -13,14 +13,14 @@ const loaderEllips = document.querySelector('.loader-ellips');
 
 const pixabayAPI = new PixabayAPI();
 let isDataRecived = false;
-
-checkBox.addEventListener('change', checkBoxSelected);
-formEl.addEventListener('submit', onFormElSubmit);
-loadMoreBtn.addEventListener('click', onLoadMoreBtn);
 let galleryLightbox = new SimpleLightbox('.gallery .card-link', {
   captionDelay: 250,
   captionsData: 'alt',
 });
+
+checkBox.addEventListener('change', checkBoxSelected);
+formEl.addEventListener('submit', onFormElSubmit);
+loadMoreBtn.addEventListener('click', onLoadMoreBtn);
 
 async function onFormElSubmit(event) {
   event.preventDefault();

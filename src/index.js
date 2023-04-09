@@ -34,7 +34,8 @@ async function onFormElSubmit(event) {
 
     if (!pixabayAPI.query) {
       galleryEl.innerHTML = '';
-      loadMoreBtn.classList.add('hidden');
+      loadMoreBtn.style.display = 'none';
+      loaderEllips.style.display = 'none';
       throw new Error();
     }
 
